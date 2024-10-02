@@ -23,7 +23,7 @@
         if(strlen($nombre) < 5){        // Indica un minimo de caracteres
             echo "Debe tener minimo 5 caracteres";
         } else {
-            echo "¡Hola, $nombre!";
+            echo "¡Hola, $nombre! bienvenido";
         }
     }
     ?>
