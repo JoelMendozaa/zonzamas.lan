@@ -21,7 +21,7 @@
         // Validar el nombre de usuario
         if (isset($_POST["nombre"])) {
             $nombre = $_POST["nombre"];
-            if (strlen($nombre) < 5 || strlen($nombre) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z0-9_]*$/', $nombre)) {
+            if (strlen($nombre) < 5 || strlen($nombre) > 20 || !preg_match('/^[a-zA-Z][a-zA-Z0-9_]*$/', $nombre)) {     // el !preg_match es para indicar las mayusculas minusculas y numeros de 0 a 9
                 echo "<p style='color:red;'>El nombre de usuario debe tener entre 5 y 20 caracteres y comenzar con una letra. Solo se permiten letras, números y guiones bajos.</p>";
                 $esValido = false; // Marcar como no válido
             }
