@@ -9,7 +9,7 @@
 
         setcookie("idioma", $_GET['idioma'], time()+ 60*60*24*7);
 
-        header("location: /bienvenidaCorreccion.php");
+        header("location: /bienvenida.php");
         exit();
 
     }
@@ -22,11 +22,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" href="/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
+    <link type="text/css" href="/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <title>Cambio de idioma</title>
 </head>
 <body>
+
 <div class="container-sm">
 
 
@@ -47,6 +49,8 @@
         
     </form>
     <br />
-    <a href="/loginCorreccion.php">Login</a><br/><br/>
+    <a href="/login.php">Login</a><br/><br/>
+
+</div>
 </body>
 </html>
