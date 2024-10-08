@@ -1,0 +1,17 @@
+
+Operadores ternarios
+//caso 1
+    $mayor_edad = False;
+    if ($edad > 18)
+        $mayor_edad = True;
+    else
+        $mayor_edad = False;
+
+    //caso 2
+    $edad > 18 ?  $mayor_edad = True : $mayor_edad = False;
+
+    //caso 3
+    $mayor_edad = $edad > 18 ?   True : False;
+
+    //caso 4
+    $mayor_edad = $edad > 18;
