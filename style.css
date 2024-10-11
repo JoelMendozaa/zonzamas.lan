@@ -101,3 +101,9 @@ body{
   .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
   }
+
+
+  .pelicula {
+    margin: 15px;
+    display: inline-block;
+  }
