@@ -25,7 +25,7 @@ $peliculas = [
         "titulo" => "Star Wars: Episodio III - La venganza de los Sith",
         "director" => "George Lucas",
         "anio" =>  2005,
-        "genero" => "Fantasia",
+        "genero" => "Fantasía",
         "poster" => "#"
     ],
     [
