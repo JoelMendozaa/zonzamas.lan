@@ -66,7 +66,7 @@
         case 'delete':
             eliminar();
 
-            header("location: /procedimental.php");
+            header("location: /pdo.php");
             exit(0);
 
         break;
@@ -114,7 +114,7 @@
         else
         {
             $breadcrumb = "
-                <li class=\"breadcrumb-item\"><a href=\"/procedimental.php\">procedimental</a></li>
+                <li class=\"breadcrumb-item\"><a href=\"/pdo.php\">pdo</a></li>
                 <li class=\"breadcrumb-item active\" aria-current=\"page\">{$usuarios_seccion}</li>
             ";
         }
@@ -142,17 +142,17 @@
         {
             $mensaje_exito = '<div class="exito">Operación realizada con éxito</div>';
             $disabled = 'disabled';
-            $botones_extra = '<a href="/procedimental.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
+            $botones_extra = '<a href="/pdo.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
 
             if($oper == 'update')
-                $botones_extra .= ' <a href="/procedimental.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
+                $botones_extra .= ' <a href="/pdo.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
         
         }
 
 
         $html_formulario = "
 
-            <form method=\"POST\" action=\"procedimental.php\">
+            <form method=\"POST\" action=\"pdo.php\">
                 <input type=\"hidden\" name=\"paso\" value=\"1\" />
                 <input type=\"hidden\" name=\"oper\" value=\"{$oper}\" />
                 <input type=\"hidden\" name=\"id\" value=\"{$id}\" />
@@ -311,8 +311,8 @@
                 $listado_usuarios .= "
                     <tr>
                         <th scope=\"row\">
-                            <a href=\"/procedimental.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
-                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/procedimental.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
+                            <a href=\"/pdo.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
+                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/pdo.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
                         </th>
                         <td>{$fila['nombre']}</td>
                         <td>{$fila['email']}</td>
@@ -327,7 +327,7 @@
         }
 
         if($pagina)
-            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/procedimental.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
+            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/pdo.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
 
         $listado_usuarios .= '
                 </tbody>
@@ -335,7 +335,7 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     '. $pagina_anterior .'
-                    <li class="page-item"><a class="page-link" href="/procedimental.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="/pdo.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
                 </ul>
             </nav>
         ';
