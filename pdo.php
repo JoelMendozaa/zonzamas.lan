@@ -5,10 +5,13 @@
     $contrasena = 'Jomedama2024!';
     $base_datos = 'gestion_usuarios';
 
-    $conexion = mysqli_connect($servidor, $usuario, $contrasena, $base_datos);
-
-    if (!$conexion) {
-        die("Error de conexión: " . mysqli_connect_error());
+    try {
+        $conexion = new PDO("mysql:host=$servidor;dbname=$base_datos", $usuario, $contrasena);
+        // Configurar PDO para que lance excepciones en caso de error
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Conexión exitosa";
+    } catch (PDOException $e) {
+        die("Error de conexión: " . $e->getMessage());
     }
 
     define('TEXTO_ERROR', '<em class="error_campo_texto">El campo es invalido</em> <br />');
@@ -194,7 +197,7 @@
                 DELETE FROM usuarios
                 WHERE id = '{$_GET['id']}'
             ";
-            $resultado = $conexion->query($conexion, $sql);
+            $resultado = mysqli_query($conexion, $sql);
         }
     }
 
@@ -210,10 +213,10 @@
             WHERE  id = '{$id}'
         ";
 
-        $resultado = $conexion->query($sql);
+        $resultado = mysqli_query($conexion, $sql);
 
 
-        $fila = $resultado->fetch_assoc($resultado);
+        $fila = $resultado->fetch(PDO::FETCH_ASSOC);
 
 
         $_POST['nombre']      = $fila['nombre'];
@@ -238,7 +241,7 @@
                 WHERE id = '{$_POST['id']}'
 
             ";
-            $resultado = $conexion->query($sql);
+            $resultado = mysqli_query($conexion, $sql);
         }
     }
 
@@ -266,7 +269,7 @@
             );
         ";
 
-        $resultado = $conexion->query($sql);
+        $resultado = mysqli_query($conexion, $sql);
     }
 
 
@@ -302,7 +305,7 @@
 
         if ($resultado->num_rows > 0) 
         {
-            while ($fila = $resultado->fetch_assoc()) 
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) 
             {
 
                 $listado_usuarios .= "
@@ -344,7 +347,7 @@
     }
 
 
-    mysqli_close($conexion);
+    $conexion = null;
 ?>
 
 <!DOCTYPE html>
