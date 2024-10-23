@@ -2,8 +2,8 @@
 
 
     $servidor   = 'localhost';
-    $usuario    = 'juanra';
-    $contraseña = 'DaWSegundo+';
+    $usuario    = 'joel';
+    $contraseña = 'Jomedama2024!';
     $base_datos = 'biblioteca';
 
 
