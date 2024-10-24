@@ -102,10 +102,6 @@
                                     </li>
                                     </ul>
                                 </div>
-                                <div class=\"col d-none d-md-block\">
-                                    <p class=\"text-center text-black m-0\"><strong>Special Offer</strong>: Free Shipping on all the orders above $100
-                                    </p>
-                                </div>
                                 <div class=\"col\">
                                     <ul class=\"d-flex justify-content-end gap-3 list-unstyled m-0\">
                                     <li>
@@ -163,46 +159,6 @@
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link me-5\" href=\"./biblioteca.php\">Biblioteca</a>
                                     </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link me-5\" href=\"#\">Women</a>
-                                    </li>
-                                    <li class=\"nav-item dropdown\">
-                                        <a class=\"nav-link me-5 active dropdown-toggle border-0\" href=\"#\" data-bs-toggle=\"dropdown\"
-                                        aria-expanded=\"false\">Page</a>
-                                        <ul class=\"dropdown-menu fw-bold\">
-                                        <li>
-                                            <a href=\"index.php\" class=\"dropdown-item\">About Us </a>
-                                        </li>
-                                        <li>
-                                            <a class=\"dropdown-item\" href=\"index.php\">Shop </a>
-                                        </li>
-                                        <li>
-                                            <a class=\"dropdown-item\" href=\"index.php\">Blog </a>
-                                        </li>
-                                        <li>
-                                            <a class=\"dropdown-item\" href=\"index.php\">Single Product </a>
-                                        </li>
-                                        <li>
-                                            <a class=\"dropdown-item\" href=\"index.php\">Single Post </a>
-                                        </li>
-                                        <li>
-                                            <a class=\"dropdown-item\" href=\"index.php\">Styles </a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\"#modallong\" class=\"dropdown-item\">cart</a>
-                                        </li>
-                                        <li>
-                                            <a href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\"#modallogin\" class=\"dropdown-item\">Login</a>
-                                        </li>
-                                        </ul>
-                                    </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link me-5\" href=\"index.php\">Shop</a>
-                                    </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link me-5\" href=\"#\">Sale</a>
-                                    </li>
-                                    </ul>
                                 </div>
                                 </div>
 
@@ -224,137 +180,10 @@
                 <div class=\"row\">
                     <div class=\"col-lg-2 pb-3\">
                     <div class=\"footer-menu\">
-                        <h5 class=\"widget-title pb-2\">Info</h5>
-                        <ul class=\"menu-list list-unstyled\">
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Track Your Order</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"index.php\">Our Blog</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Privacy policy</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Shipping</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Contact Us</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Help</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Community</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class=\"col-lg-2 pb-3\">
-                    <div class=\"footer-menu\">
-                        <h5 class=\"widget-title pb-2\">About</h5>
-                        <ul class=\"menu-list list-unstyled\">
-                        <li class=\"pb-2\">
-                            <a href=\"#\">History</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Our Team</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Services</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Company</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Manufacture</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Wholesale</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Retail</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class=\"col-lg-2 pb-3\">
-                    <div class=\"footer-menu\">
-                        <h5 class=\"widget-title pb-2\">Women Shoes</h5>
-                        <ul class=\"menu-list list-unstyled\">
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Track Your Order</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"index.php\">Our Blog</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Privacy policy</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Shipping</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Contact Us</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Help</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Community</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class=\"col-lg-2 pb-3\">
-                    <div class=\"footer-menu\">
-                        <h5 class=\"widget-title pb-2\">Popular</h5>
-                        <ul class=\"menu-list list-unstyled\">
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Prices Drop</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">New Products</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Best Sales</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"index.php\">Stores</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\"#modallogin\">Login</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\"#modallong\">Cart</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class=\"col-lg-2 pb-3\">
-                    <div class=\"footer-menu\">
-                        <h5 class=\"widget-title pb-2\">Mens Collection</h5>
-                        <ul class=\"menu-list list-unstyled\">
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Delivery</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"index.php\">About Us</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Shoes</a>
-                        </li>
-                        <li class=\"pb-2\">
-                            <a href=\"#\">Contact Us</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class=\"col-lg-2 pb-3\">
-                    <div class=\"footer-menu\">
-                        <h5 class=\"widget-title pb-3\">Get In Touch</h5>
+                        <h5 class=\"widget-title pb-3\">About us</h5>
                         <div class=\"footer-contact-text\">
                         <span>Calle Dr. Barraquer, 6, 35500 Arrecife, Las Palmas </span>
+                        <br>
                         <span> Call us: 928 81 31 14 </span>
                         <span class=\"text-hover fw-bold light-border\"><a href=\"35015531@gobiernodecanarias.org\">35015531@gobiernodecanarias.org</a></span>
                         </div>
