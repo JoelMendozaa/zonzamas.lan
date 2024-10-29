@@ -110,12 +110,12 @@
     {
         if(empty($titulo_seccion))
         {
-            $breadcrumb = "<li class=\"breadcrumb-item\">biblioteca</li>";
+            $breadcrumb = "<li class=\"breadcrumb-item\">orientado_objetos</li>";
         }
         else
         {
             $breadcrumb = "
-                <li class=\"breadcrumb-item\"><a href=\"./biblioteca.php\">biblioteca</a></li>
+                <li class=\"breadcrumb-item\"><a href=\"./biblioteca.php\">orientado_objetos</a></li>
                 <li class=\"breadcrumb-item active\" aria-current=\"page\">{$titulo_seccion}</li>
             ";
         }

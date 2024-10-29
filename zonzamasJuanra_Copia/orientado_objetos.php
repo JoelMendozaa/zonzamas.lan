@@ -1,5 +1,8 @@
 <?php
 
+    require_once "general.php";
+
+
     $servidor   = 'localhost';
     $usuario    = 'joel';
     $contrasena = 'Jomedama2024!';
@@ -10,6 +13,9 @@
     if (!$conexion){
         die("Error de conexión: " . mysqli_connect_error());
     }
+
+    echo Plantilla::header("CIFP Zonzamas");
+
 
     define('TEXTO_ERROR', '<em class="error_campo_texto">El campo es invalido</em> <br />');
     define('LIMITE_SCROLL', '5');
@@ -63,7 +69,7 @@
         case 'delete':
             eliminar();
 
-            header("location: /orientado_objetos.php");
+            header("location: ./orientado_objetos.php");
             exit(0);
 
         break;
@@ -111,7 +117,7 @@
         else
         {
             $breadcrumb = "
-                <li class=\"breadcrumb-item\"><a href=\"/orientado_objetos.php\">orientado_objetos</a></li>
+                <li class=\"breadcrumb-item\"><a href=\"./orientado_objetos.php\">orientado_objetos</a></li>
                 <li class=\"breadcrumb-item active\" aria-current=\"page\">{$usuarios_seccion}</li>
             ";
         }
@@ -139,10 +145,10 @@
         {
             $mensaje_exito = '<div class="exito">Operación realizada con éxito</div>';
             $disabled = 'disabled';
-            $botones_extra = '<a href="/orientado_objetos.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
+            $botones_extra = '<a href="./orientado_objetos.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
 
             if($oper == 'update')
-                $botones_extra .= ' <a href="/orientado_objetos.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
+                $botones_extra .= ' <a href="./orientado_objetos.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
         
         }
 
@@ -308,8 +314,8 @@
                 $listado_usuarios .= "
                     <tr>
                         <th scope=\"row\">
-                            <a href=\"/orientado_objetos.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
-                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/orientado_objetos.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
+                            <a href=\"./orientado_objetos.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
+                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '.orientado_objetos.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
                         </th>
                         <td>{$fila['nombre']}</td>
                         <td>{$fila['email']}</td>
@@ -324,7 +330,7 @@
         }
 
         if($pagina)
-            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/orientado_objetos.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
+            $pagina_anterior = '<li class="page-item"><a class="page-link" href="./orientado_objetos.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
 
         $listado_usuarios .= '
                 </tbody>
@@ -332,7 +338,7 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     '. $pagina_anterior .'
-                    <li class="page-item"><a class="page-link" href="/orientado_objetos.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="./orientado_objetos.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
                 </ul>
             </nav>
         ';
@@ -360,3 +366,9 @@
     <?php echo $html_salida; ?>
 </body>
 </html>
+
+<?php
+
+    echo Plantilla::footer();
+
+?>
