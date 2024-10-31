@@ -5,7 +5,17 @@
     
     <!--REESCRITURA-->
     RewriteRule ^biblioteca/$ biblioteca.php [L]
-    RewriteRule ^/biblioteca/pag/([0-9]+)$  /biblioteca.php?pagina=$1 
+    RewriteRule ^/biblioteca/pag/([0-9]+)$  /biblioteca.php?pagina=$1 [L]
+
+    <!--ACTUALIZAR-->
+    RewriteRule ^biblioteca/actualizar/([0-9]+)$ /biblioteca.php?oper=update&id=$2 [L]
+
+    <!--ELIMINAR-->
+    RewriteRule ^biblioteca/eliminar/([0-9]+)$ /biblioteca.php?oper=delete&id=$2 [L]
+
+    <!--CREAR-->
+    RewriteRule ^biblioteca/alta\/ /biblioteca.php?oper=create [L]
+
 
 </IfModule>
 
