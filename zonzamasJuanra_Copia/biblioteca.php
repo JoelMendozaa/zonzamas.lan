@@ -143,10 +143,10 @@
         {
             $mensaje_exito = '<div class="exito">Operación realizada con éxito</div>';
             $disabled = 'disabled';
-            $botones_extra = '<a href="./biblioteca.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
+            $botones_extra = '<a href="./biblioteca/alta/" class="btn btn-primary">Nuevo libro</a>';
 
             if($oper == 'update')
-                $botones_extra .= ' <a href="./biblioteca.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
+                $botones_extra .= ' <a href="./biblioteca/actualizar'. $id .'" class="btn btn-primary">Editar</a>';
         
         }
 
@@ -324,7 +324,7 @@
                 $listado_libros .= "
                     <tr>
                         <th scope=\"row\">
-                            <a href=\"./biblioteca.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
+                            <a href=\"./biblioteca/actualizar {$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
                             <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = './biblioteca.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
                         </th>
                         <td>{$fila['nombre']}</td>
@@ -341,7 +341,7 @@
         }
 
         if($pagina)
-            $pagina_anterior = '<li class="page-item"><a class="page-link" href="./biblioteca.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
+            $pagina_anterior = '<li class="page-item"><a class="page-link" href="./biblioteca/pag='. ($pagina - 1) .'"">Anterior</a></li>';
 
         $listado_libros .= '
                 </tbody>
@@ -349,13 +349,13 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     '. $pagina_anterior .'
-                    <li class="page-item"><a class="page-link" href="./biblioteca.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="./biblioteca/pag='. ($pagina + 1) .'">Siguiente</a></li>
                 </ul>
             </nav>
 
 
             <div class="alta">
-                <a href="./biblioteca.php?oper=create" class="btn btn-success">Alta de libro</a>
+                <a href="./biblioteca/alta" class="btn btn-success">Alta de libro</a>
             </div>
         ';
 
