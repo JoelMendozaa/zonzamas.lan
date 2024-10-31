@@ -1,0 +1,11 @@
+<IfModule mod-rewrite.c>
+    RewriteEngine On
+    <!--REDIRECCIONES-->
+    <!--RewriteRule ^producto/([0-9]+)$ /producto.php?=$1 [R=301,L]-->
+    
+    <!--REESCRITURA-->
+    RewriteRule ^biblioteca/$ biblioteca.php [L]
+    RewriteRule ^/biblioteca/pag/([0-9]+)$  /biblioteca.php?pagina=$1 
+
+</IfModule>
+

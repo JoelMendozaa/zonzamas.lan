@@ -48,9 +48,9 @@
                         <!-- ===============================================-->
                         <!--    Stylesheets-->
                         <!-- ===============================================-->
-                        <link href=\"assets/css/theme.css\" rel=\"stylesheet\" />
-                        <link href=\"css/styles.css\" rel=\"stylesheet\" />
-                        <link rel=\"stylesheet\" href=\"css/vendor.css\">
+                        <link href=\"/assets/css/theme.css\" rel=\"stylesheet\" />
+                        <link href=\"/css/styles.css\" rel=\"stylesheet\" />
+                        <link rel=\"stylesheet\" href=\"/css/vendor.css\">
                         <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
                         <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
                         <link
@@ -130,10 +130,10 @@
         {
 
             return "
- <nav id=\"header-nav\" class=\"navbar navbar-expand-lg\">
+                        <nav id=\"header-nav\" class=\"navbar navbar-expand-lg\">
                             <div class=\"container-lg\">
                                 <a class=\"navbar-brand\" href=\"index.php\">
-                                <img src=\"img/logo.png\" class=\"logo\" alt=\"logo\">
+                                <img src=\"/img/logo.png\" class=\"logo\" alt=\"logo\">
                                 </a>
                                 <button class=\"navbar-toggler d-flex d-lg-none order-3 border-0 p-1 ms-2\" type=\"button\" data-bs-toggle=\"offcanvas\"
                                 data-bs-target=\"#bdNavbar\" aria-controls=\"bdNavbar\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -149,10 +149,10 @@
                                         aria-expanded=\"false\">Home</a>
                                         <ul class=\"dropdown-menu fw-bold\">
                                         <li>
-                                            <a href=\"index.php\" class=\"dropdown-item\">Home V1</a>
+                                            <a href=\"/index.php\" class=\"dropdown-item\">Home V1</a>
                                         </li>
                                         <li>
-                                            <a href=\"index.php\" class=\"dropdown-item\">Home V2 </a>
+                                            <a href=\"/index.php\" class=\"dropdown-item\">Home V2 </a>
                                         </li>
                                         </ul>
                                     </li>
@@ -203,12 +203,12 @@
                 <!-- ===============================================-->
                 <!--    JavaScripts-->
                 <!-- ===============================================-->
-                <script src=\"vendors/@popperjs/popper.min.js\"></script>
-                <script src=\"vendors/bootstrap/bootstrap.min.js\"></script>
-                <script src=\"vendors/is/is.min.js\"></script>
+                <script src=\"/vendors/@popperjs/popper.min.js\"></script>
+                <script src=\"/vendors/bootstrap/bootstrap.min.js\"></script>
+                <script src=\"/vendors/is/is.min.js\"></script>
                 <script src=\"https://polyfill.io/v3/polyfill.min.js?features=window.scroll\"></script>
-                <script src=\"vendors/fontawesome/all.min.js\"></script>
-                <script src=\"assets/js/theme.js\"></script>
+                <script src=\"/vendors/fontawesome/all.min.js\"></script>
+                <script src=\"/assets/js/theme.js\"></script>
 
                 <link href=\"https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Rubik:wght@300;400;500;600;700;800&amp;display=swap\" rel=\"stylesheet\">
             </body>
