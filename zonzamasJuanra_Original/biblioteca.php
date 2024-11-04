@@ -36,9 +36,16 @@
 
                 if(!$form->cantidad_errores)
                 {
-                    
-                    insertar();
-                    $form->activeDisable();
+                    if(!existeLibro())
+                    {
+                        insertar();
+                        $form->activeDisable();
+                    }
+                    else
+                    {
+                        $form->duplicado = True;
+                    }
+
                 }
             }
 
@@ -62,9 +69,17 @@
 
                 if(!$form->cantidad_errores)
                 {
-                    actualizar();
-                    $form->activeDisable();
+                    if (!existeLibro($form->val['id']))
+                    {
+                        actualizar();
+                        $form->activeDisable();
+                    }
+                    else
+                    {
+                        $form->duplicado = True;
+                    }
                 }
+
             }
 
             $html_salida .= cabecera('actualizar');
@@ -77,7 +92,7 @@
 
             ob_clean();
 
-            header("location: /biblioteca.php");
+            header("location: /biblioteca/");
             exit(0);
 
         break;
@@ -95,7 +110,7 @@
     {
         $form = Form::getInstance();
 
-        $form->accion('biblioteca.php');
+        $form->accion('/biblioteca/');
 
         $paso        = new Hidden('paso'); 
         $paso->value = 1;
@@ -103,8 +118,8 @@
         $oper        = new Hidden('oper'); 
         $id          = new Hidden('id');        
 
-        $nombre      = new Input   ('name'       ,['placeholder' => 'Nombre del libro...'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
-        $descripcion = new Textarea('description',['placeholder' => 'Descripción del libro...', 'validar' => True ]);
+        $nombre      = new Input   ('nombre'       ,['placeholder' => 'Nombre del libro...'     , 'validar' => True, 'ereg' => EREG_TEXTO_100_OBLIGATORIO  ]);
+        $descripcion = new Textarea('descripcion',['placeholder' => 'Descripción del libro...', 'validar' => True ]);
         $autor       = new Input   ('autor'      ,['placeholder' => 'Autor del libro...'      , 'validar' => True, 'ereg' => EREG_TEXTO_150_OBLIGATORIO  ]);
         $editorial   = new Select  ('editorial'  ,EDITORIALES,['validar' => True]);
 
@@ -129,7 +144,7 @@
         else
         {
             $breadcrumb = "
-                <li class=\"breadcrumb-item\"><a href=\"/biblioteca.php\">biblioteca</a></li>
+                <li class=\"breadcrumb-item\"><a href=\"/biblioteca/\">biblioteca</a></li>
                 <li class=\"breadcrumb-item active\" aria-current=\"page\">{$titulo_seccion}</li>
             ";
         }
@@ -157,103 +172,78 @@
         if($form->val['paso'] && $form->cantidad_errores == 0)
         {
             $mensaje_exito = True;
-            $botones_extra = '<a href="/biblioteca.php?oper=create" class="btn btn-primary">Nuevo libro</a>';
+            $botones_extra = '<a href="/biblioteca/alta/" class="btn btn-primary">Nuevo libro</a>';
 
             if($oper == 'update')
-                $botones_extra .= ' <a href="/biblioteca.php?oper=update&id='. $id .'" class="btn btn-primary">Editar</a>';
+                $botones_extra .= ' <a href="/biblioteca/actualizar/'. $id .'" class="btn btn-primary">Editar</a>';
         
         }
 
         $html_formulario = $form->pintar(['botones_extra' => $botones_extra,'exito' =>  $mensaje_exito]);
 
-
-        /*
-        $html_formulario = "
-
-            <form method=\"POST\" action=\"biblioteca.php\">
-                <input type=\"hidden\" name=\"paso\" value=\"1\" />
-                <input type=\"hidden\" name=\"oper\" value=\"{$oper}\" />
-                <input type=\"hidden\" name=\"id\" value=\"{$id}\" />
-
-                {$mensaje_exito}
-
-                <label class=\"". $errores['nombre']['class_error'] ." form-label\" for=\"nombre\">Nombre:</label>
-                <input {$disabled} class=\"form-control\" type=\"text\" id=\"nombre\" name=\"nombre\" value=\"{$_POST['nombre']}\" placeholder=\"Nombre del libro...\">
-                ". $errores['nombre']['desc_error'] ."
-                <br />
-
-                <label class=\"". $errores['descripcion']['class_error'] ." form-label\" for=\"descripcion\">Descripción:</label>
-                <textarea {$disabled} class=\"form-control\" id=\"descripcion\" name=\"descripcion\" placeholder=\"Descripción del libro...\">{$_POST['descripcion']}</textarea>
-                ". $errores['descripcion']['desc_error'] ."
-                <br />
-
-                <label class=\"". $errores['autor']['class_error'] ." form-label\" for=\"autor\">Autor:</label>
-                <input {$disabled} class=\"form-control\" type=\"text\" id=\"autor\" name=\"autor\" value=\"{$_POST['autor']}\" placeholder=\"Autor del libro...\"> 
-                ". $errores['autor']['desc_error'] ."
-                <br />
-
-                <label class=\"". $errores['editorial']['class_error'] ." form-label\" for=\"editorial\">Editorial:</label>
-                <select {$disabled}  class=\"form-control form-select\"  id=\"editorial\" name=\"editorial\"> 
-                    {$value_editoriales}
-                </select>
-                ". $errores['editorial']['desc_error'] ."
-                <br />
-
-                <div style=\"text-align:right\">
-                    {$botones_extra}
-                    <input {$disabled} type=\"submit\" class=\"btn btn-primary\" value=\"Enviar\" />
-                </div>
-                
-
-            </form>
-        
-        ";
-        */
-
         return $html_formulario;
-
-
-
 
     }
 
-    function eliminar()
+    function existeLibro($id='')
     {
+        $form = Form::getInstance();
 
-        $id = Form::getInstance()->val['id'];
 
-        if (!empty($id))
+        if (   !empty($form->val['nombre']) 
+            && !empty($form->val['descripcion'])
+            && !empty($form->val['autor'])
+            && !empty($form->val['editorial'])
+        )
         {
+            $andid = '';
+            if (!empty($id))
+                $andid = "AND id <> '{$id}' ";
+
+
             $sql = "
-                DELETE FROM libros
-                WHERE id = '{$id}'
+                SELECT nombre
+                FROM   libros
+                WHERE  nombre      = '{$form->val['nombre']}'
+                AND    descripcion = '{$form->val['descripcion']}'
+                AND    autor       = '{$form->val['autor']}'
+                AND    editorial   = '{$form->val['editorial']}'
+                {$andid}
             ";
+
             $resultado = BBDD::query($sql);
         }
+
+        return $resultado->num_rows;
+    }
+
+
+    function eliminar()
+    {
+        $libro = new Libro();
+
+        $libro->id = Form::getInstance()->val['id'];
+
+        $libro->eliminar();
+
     }
 
     function recuperar()
     {
+
+
         $form = Form::getInstance();
 
-        $id =  $form->val['id'];
+        $libro = new Libro();
 
-        $sql = "
-            SELECT * 
-            FROM   libros
-            WHERE  id = '{$id}'
-        ";
-
-        $resultado = BBDD::query($sql);
+        $libro->recuperar($form->val['id']);
 
 
-        $fila = $resultado->fetch_assoc();
 
-
-        $form->elementos['name']->value        = $fila['nombre'];
-        $form->elementos['description']->value = $fila['descripcion'];
-        $form->elementos['autor']->value       = $fila['autor'];
-        $form->elementos['editorial']->value   = $fila['editorial'];
+        $form->elementos['nombre']->value        = $libro->nombre;
+        $form->elementos['descripcion']->value = $libro->descripcion;
+        $form->elementos['autor']->value       = $libro->autor;
+        $form->elementos['editorial']->value   = $libro->editorial;
     }
 
     function actualizar()
@@ -263,22 +253,10 @@
 
         if (!empty($form->val['id']))
         {
-            $sql = "
-                UPDATE libros
+            $libro = new Libro();
+            $libro->inicializar($form->val);
 
-                SET  nombre      = '{$form->val['name']}'
-                    ,descripcion = '{$form->val['description']}'
-                    ,autor       = '{$form->val['autor']}'
-                    ,editorial   = '{$form->val['editorial']}'
-
-                    ,ip_ult_mod   = '{$_SERVER['REMOTE_ADDR']}'
-                    ,fecha_ult_mod = CURRENT_TIMESTAMP
-
-
-                WHERE id = '{$form->val['id']}'
-
-            ";
-            $resultado = BBDD::query($sql);
+            $libro->actualizar();
         }
     }
 
@@ -287,27 +265,10 @@
     {
         $form = Form::getInstance();
 
-        $sql = "
-            INSERT INTO libros
-            (
-                nombre
-               ,descripcion
-               ,autor
-               ,editorial
-               ,ip_alta
-            )
-            VALUES
-            (   
-                 '". $form->val['name'] ."'
-                ,'". $form->val['description'] ."'
-                ,'". $form->val['autor'] ."'
-                ,'". $form->val['editorial'] ."'
+        $libro = new Libro();
+        $libro->inicializar($form->val);
 
-                ,'". $_SERVER['REMOTE_ADDR'] ."'
-            );
-        ";
-
-        $resultado = BBDD::query($sql);
+        $libro->insertar();
     }
 
 
@@ -349,8 +310,8 @@
                 $listado_libros .= "
                     <tr>
                         <th scope=\"row\">
-                            <a href=\"/biblioteca.php?oper=update&id={$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
-                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/biblioteca.php?oper=delete&id={$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
+                            <a href=\"/biblioteca/actualizar/{$fila['id']}\" class=\"btn btn-primary\">Actualizar</a>
+                            <a onclick=\"if(confirm('Cuidado, estás tratando de eliminar el libro: {$fila['nombre']}')) location.href = '/biblioteca/eliminar/{$fila['id']}';\" class=\"btn btn-danger\">Eliminar</a>
                         </th>
                         <td>{$fila['nombre']}</td>
                         <td>{$fila['descripcion']}</td>
@@ -366,7 +327,7 @@
         }
 
         if($pagina)
-            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/biblioteca.php?pagina='. ($pagina - 1) .'"">Anterior</a></li>';
+            $pagina_anterior = '<li class="page-item"><a class="page-link" href="/biblioteca/pag/'. ($pagina - 1) .'"">Anterior</a></li>';
 
         $listado_libros .= '
                 </tbody>
@@ -374,13 +335,13 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     '. $pagina_anterior .'
-                    <li class="page-item"><a class="page-link" href="/biblioteca.php?pagina='. ($pagina + 1) .'">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="/biblioteca/pag/'. ($pagina + 1) .'">Siguiente</a></li>
                 </ul>
             </nav>
 
 
             <div class="alta">
-                <a href="/biblioteca.php?oper=create" class="btn btn-success">Alta de libro</a>
+                <a href="/biblioteca/alta/" class="btn btn-success">Alta de libro</a>
             </div>
         ';
 

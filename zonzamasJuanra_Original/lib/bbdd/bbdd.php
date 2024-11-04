@@ -9,7 +9,7 @@
         private const SERVIDOR = 'localhost';
         private const USUARIO  = 'juanra';
         private const PASSWORD = 'DaWSegundo+';
-        private const BBDD     = 'biblioteca';
+        private const BBDD     = 'zonzamas';
 
 
         private function __construct()
@@ -47,4 +47,3 @@
             return self::$instance->conexion->query($query);
         }
     }
-

@@ -1,3 +1,4 @@
+
 <?php
 
     class Literal
@@ -13,8 +14,8 @@
             {
                 case 'ES':
                     $this->lit = [
-                        'name'        => 'Nombre'
-                       ,'description' => 'Descripción'
+                        'nombre'      => 'Nombre'
+                       ,'descripcion' => 'Descripción'
                        ,'autor'       => 'Autor'
                        ,'editorial'   => 'Editorial'
                        ,'enviar'      => 'Enviar'
