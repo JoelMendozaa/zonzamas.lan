@@ -1,4 +1,3 @@
-
 <?php
 
     class Literal
@@ -20,7 +19,9 @@
                        ,'editorial'   => 'Editorial'
                        ,'enviar'      => 'Enviar'
                        ,'error_gen'   => 'El campo es inválido'
-
+                       ,'nuevo'       => 'Nuevo'
+                       ,'editar'      => 'Editar'
+ 
                     ];
 
                 break;

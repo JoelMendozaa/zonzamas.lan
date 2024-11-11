@@ -1,3 +1,4 @@
+
 <?php
 
     class BBDD
@@ -7,9 +8,9 @@
 
         //Datos de conexión
         private const SERVIDOR = 'localhost';
-        private const USUARIO  = 'juanra';
-        private const PASSWORD = 'DaWSegundo+';
-        private const BBDD     = 'zonzamas';
+        private const USUARIO  = 'joel';
+        private const PASSWORD = 'Jomedama2024!+';
+        private const BBDD     = 'biblioteca';
 
 
         private function __construct()
