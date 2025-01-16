@@ -7,6 +7,9 @@ $username = "joel";
 $password = "Jomedama2024!";
 $dbname = "bbdd_joel";
 
+// Inicializar array de respuesta
+$respuesta = [];
+
 // Crear conexión a la base de datos
 $conexion = new mysqli($servername, $username, $password, $dbname);
 
@@ -21,11 +24,18 @@ if (!isset($_GET['dni']) || empty($_GET['dni'])) {
     exit;
 }
 
-$dni = $_GET['dni'];
+$dni = sanitizar_entrada($_GET['dni']);
 
 // Preparar la consulta SQL
 $sql = "SELECT * FROM usuarios WHERE dni = ?";
 $stmt = $conexion->prepare($sql);
+
+if (!$stmt) {
+    // Manejo de error si no se pudo preparar la consulta
+    echo json_encode(['success' => false, 'message' => 'Error al preparar la consulta: ' . $conexion->error]);
+    exit;
+}
+
 $stmt->bind_param("s", $dni);
 $stmt->execute();
 
@@ -35,12 +45,22 @@ $resultado = $stmt->get_result();
 if ($resultado->num_rows > 0) {
     // Si encontramos un usuario con el DNI proporcionado
     $row = $resultado->fetch_assoc();
-    echo json_encode(['success' => true, 'data' => $row]);
+    $respuesta = ['success' => true, 'data' => $row];
 } else {
     // Si no se encontró ningún usuario
-    echo json_encode(['success' => false, 'message' => 'No se encontraron datos para el DNI especificado']);
+    $respuesta = ['success' => false, 'message' => 'No se encontraron datos para el DNI especificado'];
 }
 
 // Cerrar la declaración y la conexión
 $stmt->close();
 $conexion->close();
+
+// Enviar respuesta JSON
+echo json_encode($respuesta);
+
+// Función para sanitizar la entrada
+function sanitizar_entrada($entrada) {
+    // Sanitiza las entradas para evitar inyecciones SQL y XSS
+    return htmlspecialchars(trim($entrada));
+}
+?>

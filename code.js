@@ -208,7 +208,6 @@ function obtenerDatosPhp() {
 }
 
 
-// Función para publicar los datos en la base de datos (POST)
 function publicarBbdd() {
     const formData = new FormData(document.querySelector('.form'));
 
@@ -234,10 +233,11 @@ function publicarBbdd() {
     .then(data => {
         console.log('Datos procesados: ', data);
         if (data.mensaje === "Los datos se han guardado correctamente en la base de datos") {
-            // Limpiar y ocultar el formulario
+            // Limpiar los campos del formulario
             const formElement = document.querySelector('.form');
             formElement.querySelectorAll('input').forEach(input => input.value = '');
-            formElement.style.display = 'none'; 
+            // Ya no ocultamos el formulario, solo limpiamos los campos
+            // formElement.style.display = 'none'; // Elimina esta línea para que el formulario no desaparezca
         } else {
             alert("Hubo un error al guardar los datos: " + data.error);
         }
@@ -246,6 +246,7 @@ function publicarBbdd() {
         console.error('Error: ', error);
     });
 }
+
 
 // Función para obtener los datos desde la base de datos (GET)
 function obtenerBbdd() {
@@ -257,30 +258,33 @@ function obtenerBbdd() {
         return;
     }
 
+    // Realizar la solicitud GET al servidor con el DNI
     fetch(`http://zonzamas.lan/obtener_mysql.php?dni=${dni}`, {
         method: 'GET',
     })
-    .then(res => res.json())
+    .then(res => res.json())  // Convertir la respuesta a JSON
     .then(data => {
+        // Verificar la respuesta del servidor
         if (data.success === false) {
             alert("No se encontraron datos para el DNI proporcionado.");
         } else {
             // Poblar el formulario con los datos recibidos de la base de datos
-            document.getElementById('nombre').value = data.nombre || '';
-            document.getElementById('apellido').value = data.apellidos || '';
-            document.getElementById('dni').value = data.dni || '';
-            document.getElementById('nacimiento').value = data.fechaNacimiento || '';
-            document.getElementById('cp').value = data.cp || '';
-            document.getElementById('email').value = data.email || '';
-            document.getElementById('fijo').value = data.telFijo || '';
-            document.getElementById('movil').value = data.telMovil || '';
-            document.getElementById('iban').value = data.iban || '';
-            document.getElementById('tarjeta').value = data.tarjeta || '';
-            document.getElementById('passwd').value = data.contrasena || '';
-            document.getElementById('confirmar').value = data.contrasena || '';
+            document.getElementById('nombre').value = data.data.nombre || '';
+            document.getElementById('apellido').value = data.data.apellidos || '';
+            document.getElementById('dni').value = data.data.dni || '';
+            document.getElementById('nacimiento').value = data.data.fechaNacimiento || '';
+            document.getElementById('cp').value = data.data.codigoPostal || '';
+            document.getElementById('email').value = data.data.email || '';
+            document.getElementById('fijo').value = data.data.telFijo || '';
+            document.getElementById('movil').value = data.data.telMovil || '';
+            document.getElementById('iban').value = data.data.iban || '';
+            document.getElementById('tarjeta').value = data.data.tarjetaCredito || '';
+            document.getElementById('passwd').value = data.data.password || '';
+            document.getElementById('confirmar').value = data.data.password || '';
         }
     })
     .catch(error => {
         console.error('Error al cargar datos: ', error);
+        alert("Hubo un error al cargar los datos desde la base de datos.");
     });
 }
