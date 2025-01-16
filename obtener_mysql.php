@@ -24,7 +24,7 @@ if (!isset($_GET['dni']) || empty($_GET['dni'])) {
     exit;
 }
 
-$dni = sanitizar_entrada($_GET['dni']);
+$dni = $_GET['dni']; // Se elimina sanitización
 
 // Preparar la consulta SQL
 $sql = "SELECT * FROM usuarios WHERE dni = ?";
@@ -58,9 +58,3 @@ $conexion->close();
 // Enviar respuesta JSON
 echo json_encode($respuesta);
 
-// Función para sanitizar la entrada
-function sanitizar_entrada($entrada) {
-    // Sanitiza las entradas para evitar inyecciones SQL y XSS
-    return htmlspecialchars(trim($entrada));
-}
-?>
