@@ -28,9 +28,6 @@ try {
         }
     }
 
-    // Sanitizar todas las entradas
-    $entrada_sanitizada = array_map('sanitizar_entrada', $_POST);
-
     // Preparar la declaración SQL para insertar los datos
     $sql = "INSERT INTO usuarios (dni, nombre, apellidos, fechaNacimiento, cp, email, telFijo, telMovil, tarjeta, iban, contrasena) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -41,17 +38,17 @@ try {
     }
 
     $stmt->bind_param("sssssssssss",    // Las "s" significa que es de tipo string cada campo
-        $entrada_sanitizada['dni'], 
-        $entrada_sanitizada['nombre'], 
-        $entrada_sanitizada['apellidos'], 
-        $entrada_sanitizada['fechaNacimiento'], 
-        $entrada_sanitizada['codigoPostal'], 
-        $entrada_sanitizada['email'], 
-        $entrada_sanitizada['telFijo'], 
-        $entrada_sanitizada['telMovil'], 
-        $entrada_sanitizada['tarjetaCredito'], 
-        $entrada_sanitizada['iban'], 
-        $entrada_sanitizada['password']
+        $_POST['dni'], 
+        $_POST['nombre'], 
+        $_POST['apellidos'], 
+        $_POST['fechaNacimiento'], 
+        $_POST['codigoPostal'], 
+        $_POST['email'], 
+        $_POST['telFijo'], 
+        $_POST['telMovil'], 
+        $_POST['tarjetaCredito'], 
+        $_POST['iban'], 
+        $_POST['password']
     );
 
     if (!$stmt->execute()) {
@@ -73,9 +70,4 @@ try {
 
     // Enviar respuesta JSON
     echo json_encode($respuesta);
-}
-
-function sanitizar_entrada($entrada) {
-    // Sanitiza las entradas para evitar inyecciones SQL
-    return htmlspecialchars(trim($entrada));
 }
