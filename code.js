@@ -18,25 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.form');
   
 
-   
-    // Función para recuperar los datos guardados
-/*    function recuperarDatos() {
-        const datos = JSON.parse(localStorage.getItem('formularioDatos'));
-        if (datos) {
-            form.querySelectorAll('input').forEach(input => {
-                input.value = datos[input.placeholder] || '';
-            });
-            alert('Datos recuperados correctamente');
-        } else {
-            alert('No hay datos guardados');
-        }
-    }*/
-
     // Eventos para los botones
     document.getElementById('cargarJson').addEventListener('click', obtenerDatosJson);
     document.getElementById('pubPhp').addEventListener('click', publicarPhp);
     document.getElementById('cargarPhp').addEventListener('click', obtenerDatosPhp);
     document.getElementById('pubBbdd').addEventListener('click', publicarBbdd);
+    document.getElementById('cargarBbdd').addEventListener('click', obtenerBbdd);
 
     
 
@@ -66,11 +53,11 @@ function validate(field, regex){
 
 // Función para rellenar el formulario con los datos
 function rellenarFormulario(data) {
-    const inputs = document.querySelectorAll('input'); // Seleccionar todos los inputs
+    const inputs = document.querySelectorAll('input'); 
     inputs.forEach(input => {
-      const fieldName = input.name; // Nombre del campo en el formulario
+      const fieldName = input.name;
       if (data[fieldName]) {
-        input.value = data[fieldName]; // Asignar el valor correspondiente
+        input.value = data[fieldName];
       }
     });
   }
@@ -219,13 +206,13 @@ function publicarBbdd() {
 
     fetch('http://zonzamas.lan/publicar_mysql.php', {
         method: 'POST',
-        body: formData // Enviar los datos como FormData
+        body: formData
     })
-    .then(res => res.text()) // Primero obtenemos el cuerpo como texto
+    .then(res => res.text())
     .then(text => {
-        console.log('Respuesta del servidor: ', text); // Ver el contenido de la respuesta
+        console.log('Respuesta del servidor: ', text); 
         try {
-            return JSON.parse(text); // Intentamos convertir a JSON
+            return JSON.parse(text); 
         } catch (e) {
             throw new Error('La respuesta no es un JSON válido');
         }
@@ -233,11 +220,9 @@ function publicarBbdd() {
     .then(data => {
         console.log('Datos procesados: ', data);
         if (data.mensaje === "Los datos se han guardado correctamente en la base de datos") {
-            // Limpiar los campos del formulario
             const formElement = document.querySelector('.form');
             formElement.querySelectorAll('input').forEach(input => input.value = '');
-            // Ya no ocultamos el formulario, solo limpiamos los campos
-            // formElement.style.display = 'none'; // Elimina esta línea para que el formulario no desaparezca
+
         } else {
             alert("Hubo un error al guardar los datos: " + data.error);
         }
@@ -250,25 +235,20 @@ function publicarBbdd() {
 
 // Función para obtener los datos desde la base de datos (GET)
 function obtenerBbdd() {
-    const dni = document.getElementById('dni').value;  // Obtener el DNI del formulario
-
-    // Verificar si el DNI está vacío
+    const dni = document.getElementById('dni').value;  
     if (!dni) {
         alert("Por favor, ingresa un DNI para recuperar los datos.");
         return;
     }
 
-    // Realizar la solicitud GET al servidor con el DNI
     fetch(`http://zonzamas.lan/obtener_mysql.php?dni=${dni}`, {
         method: 'GET',
     })
     .then(res => res.json())  // Convertir la respuesta a JSON
     .then(data => {
-        // Verificar la respuesta del servidor
         if (data.success === false) {
             alert("No se encontraron datos para el DNI proporcionado.");
         } else {
-            // Poblar el formulario con los datos recibidos de la base de datos
             document.getElementById('nombre').value = data.data.nombre || '';
             document.getElementById('apellido').value = data.data.apellidos || '';
             document.getElementById('dni').value = data.data.dni || '';
