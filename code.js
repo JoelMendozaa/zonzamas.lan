@@ -115,6 +115,7 @@ function obtenerDatosJson(){
         })
 }
 
+// Función para publicar los datos (POST)
 function publicarPhp() {
     const formData = new FormData(document.querySelector('.form'));
 
@@ -136,12 +137,11 @@ function publicarPhp() {
                 // Limpiar y ocultar el formulario
                 const formElement = document.querySelector('.form');
                 formElement.querySelectorAll('input').forEach(input => input.value = '');
-                
-                // Ocultar el formulario
-                formElement.style.display = 'none';
+                formElement.style.display = 'none'; 
 
                 // Esperar 2 segundos antes de recargar los datos
                 setTimeout(() => {
+
                     // Solicitar datos al servidor
                     fetch('http://zonzamas.lan/get_php.php', {
                         method: 'GET',
@@ -150,9 +150,6 @@ function publicarPhp() {
                         .then(data => {
                             if (data.message === "Datos recuperados correctamente") {
                                 const userData = data.data;
-
-                                // Mostrar el formulario de nuevo
-                                formElement.style.display = 'block';
 
                                 // Poblar el formulario con los datos recibidos
                                 document.getElementById('nombre').value = userData.nombre || '';
@@ -179,7 +176,6 @@ function publicarPhp() {
             console.error('Error: ', error);
         });
 }
-
 
 
 // Función para obtener los datos guardados (GET)
