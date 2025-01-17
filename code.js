@@ -79,14 +79,14 @@ function obtenerDatosJson(){
                 apellidos: document.getElementById('apellido').value = data.apellidos,
                 dni: document.getElementById('dni').value = data.dni,
                 fechaNacimiento: document.getElementById('nacimiento').value = data.fecha,
-                codigoPostal: document.getElementById('cp').value = data.cp,
+                codigoPostal: document.getElementById('cp').value = data.codigoPostal,
                 email: document.getElementById('email').value = data.correo,
                 telFijo: document.getElementById('fijo').value = data.fijo,
                 telMovil: document.getElementById('movil').value = data.movil,
                 iban: document.getElementById('iban').value = data.iban,
-                tarjetaCredito: document.getElementById('tarjeta').value = data.tarjeta,
-                password: document.getElementById('passwd').value = data.contrasena,
-                confirmarPassword: document.getElementById('confirmar').value = data.contrasena,
+                tarjetaCredito: document.getElementById('tarjeta').value = data.tarjetaCredito,
+                password: document.getElementById('passwd').value = data.password,
+                confirmarPassword: document.getElementById('confirmar').value = data.password,
             };
 
             // Asignar valores dinámicamente y validar
@@ -244,23 +244,25 @@ function obtenerBbdd() {
     fetch(`http://zonzamas.lan/obtener_mysql.php?dni=${dni}`, {
         method: 'GET',
     })
-    .then(res => res.json())  // Convertir la respuesta a JSON
+    .then(res => res.json())
     .then(data => {
+        console.log('Datos recibidos:', data); // LOG
         if (data.success === false) {
             alert("No se encontraron datos para el DNI proporcionado.");
         } else {
+            console.log('Datos del usuario:', data.data);
             document.getElementById('nombre').value = data.data.nombre || '';
             document.getElementById('apellido').value = data.data.apellidos || '';
             document.getElementById('dni').value = data.data.dni || '';
             document.getElementById('nacimiento').value = data.data.fechaNacimiento || '';
-            document.getElementById('cp').value = data.data.codigoPostal || '';
+            document.getElementById('cp').value = data.data.cp || '';
             document.getElementById('email').value = data.data.email || '';
             document.getElementById('fijo').value = data.data.telFijo || '';
             document.getElementById('movil').value = data.data.telMovil || '';
             document.getElementById('iban').value = data.data.iban || '';
-            document.getElementById('tarjeta').value = data.data.tarjetaCredito || '';
-            document.getElementById('passwd').value = data.data.password || '';
-            document.getElementById('confirmar').value = data.data.password || '';
+            document.getElementById('tarjeta').value = data.data.tarjeta || ''; 
+            document.getElementById('passwd').value = data.data.contrasena || ''; 
+            document.getElementById('confirmar').value = data.data.contrasena || '';
         }
     })
     .catch(error => {
